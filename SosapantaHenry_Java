@@ -1,0 +1,80 @@
+package com.mycompany.p1sosapantahenry;
+import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.FileWriter;
+        
+public class P1SosapantaHenry {
+
+    public static void main(String[] args) {
+        //INSTANCIAMOS EL OBJETO PARA LA LEER LA ENTRADA DE DATOS
+        Scanner Sosapanta_leer = new Scanner(System.in);
+        //CREAMOS EL OBJETO PARA LOS ARCHIVOS JSON Y CSV
+        final String FILE_PATH = "Notas.CSV";
+        final String FILE_PATH_JSON = "Promedio.JSON";
+        //CREAMOS UNA VARIABLE PARA NUESTRO MENU
+        int Sosapanta_op;
+        float Sosapanta_n1=0, Sosapanta_n2=0, Sosapanta_n3=0, Sosapanta_promedio;
+        do{
+        System.out.println("1. Registro de notas");
+        System.out.println("2. Promedio");
+        System.out.println("3. Salir");
+        Sosapanta_op = Sosapanta_leer.nextInt();
+        switch(Sosapanta_op){
+            //OPCION PARA REGISTRO DE NOTAS 
+            case 1:
+            //PEDIMOS AL USUARIO QUE INGRESE LAS NOTAS
+                System.out.println("Ingrese la primera nota ha registrar");
+                Sosapanta_n1 = Sosapanta_leer.nextFloat();
+                 //CONTROLAMOS EL RANGO DE TODAS NOTAS EN ESTE CASO ESTARIA ENTRE 0 A 20 
+                while(Sosapanta_n1<0 || Sosapanta_n1>20){
+                    System.out.println("Las notas notas que se registren deben estar entre (0-20)");
+                    Sosapanta_n1 = Sosapanta_leer.nextFloat();
+                }
+                System.out.println("Ingrese la segunda nota ha registrar");
+                Sosapanta_n2 = Sosapanta_leer.nextFloat();
+                while(Sosapanta_n2<0 || Sosapanta_n2>20){
+                    System.out.println("Las notas que se registren deben estar entre (0-20)");
+                    Sosapanta_n2 = Sosapanta_leer.nextFloat();
+                }
+                System.out.println("Ingrese la tercera nota ha registrar");
+                Sosapanta_n3 = Sosapanta_leer.nextFloat();
+                while(Sosapanta_n3<0 || Sosapanta_n3>20){
+                    System.out.println("Las notas que se registren deben estar entre (0-20)");
+                    Sosapanta_n3 = Sosapanta_leer.nextFloat();
+                }
+                //CREAMOS EL ARCHIVO CSV
+                try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))){
+                    writer.write("Nota 1: "+Sosapanta_n1+ ", Nota 2: "+ Sosapanta_n2 +", Nota 3: "+ Sosapanta_n3 );
+                    System.out.println("Archivo CSV guardado correctamente: "+FILE_PATH);
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                //EN ESTA OPCION CALCULAREMOS EL PROMEDIO DE LAS NOTAS QUE SE REGISTRARON ANTERIORMENTE
+                Sosapanta_promedio=(Sosapanta_n1+Sosapanta_n2+Sosapanta_n3)/3;
+                System.out.println("Su promedio es: "+Sosapanta_promedio);
+                //CREAMOS EL ARCHIVO JSON
+                try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH_JSON))){
+                    writer.write("{");
+                    writer.write("Promedio: "+ Sosapanta_promedio);
+                    writer.write("}");
+                    System.out.println("Archivo JSON guardado correctamente: "+ FILE_PATH_JSON);
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+                break;
+            case 3:
+                //ESTA ES LA OPCION PARA SALIR DEL MENU
+                System.out.println("Usted ha salido del programa correctamente");
+                break;
+            default :
+                //ESTE APARTADO ES EN EL CASO DE QUE SE DIGITE UNA OPCION INVALIDA
+                System.out.println("Opcion incorrecta pruebe de nuevo");
+                Sosapanta_op = Sosapanta_leer.nextInt();
+        }      
+        
+        }while(Sosapanta_op != 3);
+    }
+}
