@@ -1,0 +1,88 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+void Sosapanta_menu();
+void Sosapanta_registro();
+void Sosapanta_promedio();
+float  Sosapanta_n1, Sosapanta_n2, Sosapanta_n3;
+
+int main()
+{
+    Sosapanta_menu();
+    return 0;
+}
+
+void Sosapanta_menu(){
+    int Sosapanta_op;
+    cout<<"1. Registrar notas"<<endl;
+    cout<<"2. Promedio"<<endl;
+    cout<<"3. Salir"<<endl;
+    cin>>Sosapanta_op;
+    switch(Sosapanta_op){
+    case 1:
+        Sosapanta_registro();
+        Sosapanta_menu();
+        break;
+    case 2:
+        Sosapanta_promedio();
+        Sosapanta_menu();
+        break;
+    case 3:
+        cout<<"Usted ha salido del programa correctamente"<<endl;
+        break;
+    default:
+        cout<<"Opcion incorrecta intente nuevamente"<<endl;
+        cin>>Sosapanta_op;
+    }
+}
+
+void Sosapanta_registro(){
+    //SE INGRESA LAS NOTAS
+    cout<<"Ingrese la primera nota ha registrar"<<endl;
+    cin>>Sosapanta_n1;
+    //SE CONTROLA LOS RANGOS DE LAS NOTAS
+    while(Sosapanta_n1<0 || Sosapanta_n1>20){
+        cout<<"Las notas que se registren deben estar en el rango de (0-20)"<<endl;
+        cin>>Sosapanta_n1;
+    }
+    cout<<"Ingrese la segunda nota ha registrar"<<endl;
+    cin>>Sosapanta_n2;
+    while(Sosapanta_n2<0 || Sosapanta_n2>20){
+        cout<<"Las notas que se registren deben estar en el rango de (0-20)"<<endl;
+        cin>>Sosapanta_n2;
+    }
+    cout<<"Ingrese la tercera nota ha registrar"<<endl;
+    cin>>Sosapanta_n3;
+    while(Sosapanta_n3<0 || Sosapanta_n3>20){
+        cout<<"Las notas que se registren deben estar en el rango de (0-20)"<<endl;
+        cin>>Sosapanta_n3;
+        }
+        //SE CREA EL ARCHIVO TXT PARA GUARDAR LAS NOTAS
+          ofstream archivo("Sosapanta_notas.txt");
+    if(archivo.is_open()){
+        archivo<< "Notas registradas: "<<endl;
+        archivo<< "Nota 1: " << Sosapanta_n1<<endl;
+        archivo<< "Nota 2: " << Sosapanta_n2<<endl;
+        archivo<< "Nota 3: " << Sosapanta_n3<<endl;
+        archivo.close();
+        cout<<"Notas registradas en el archivo 'Sosapanta_notas.txt'."<<endl;
+    } else {
+        cout<<"Error al abrir el archivo para guardar las notas."<<endl;
+    }
+}
+
+void Sosapanta_promedio(){
+    //SE CALCULA EL PROMEDIO DE LA NOTAS INGRESADAS
+    float Sosapanta_promedio=(Sosapanta_n1+Sosapanta_n2+Sosapanta_n3)/3;
+    cout<<"El promoedio es "<<Sosapanta_promedio<<endl;
+    //SE GUARDA EL PROMEDIO EN EL MISMO ARCHIVO TXT QUE LAS NOTAS
+     ofstream archivo("Sosapanta_notas.txt", ios::app);
+    if(archivo.is_open()){
+        archivo << "Promedio: " << Sosapanta_promedio << endl;
+        archivo.close();
+        cout<<"Promedio agregado al archivo 'Sosapanta_notas.txt'."<<endl;
+    } else {
+        cout<<"Error al abrir el archivo para guardar el promedio."<<endl;
+    }
+}
