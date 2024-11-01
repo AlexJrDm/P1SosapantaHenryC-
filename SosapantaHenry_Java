@@ -6,6 +6,9 @@ import java.io.FileWriter;
         
 public class P1SosapantaHenry {
 
+/*Recomiendo realizar los procesos en diferentes métodos-funciones para realizar un buen código limpio y 
+en el main simplemente llamar al objeto con sus métodos o un método único el cual contenga todos los procesos
+*/
     public static void main(String[] args) {
         //INSTANCIAMOS EL OBJETO PARA LA LEER LA ENTRADA DE DATOS
         Scanner Sosapanta_leer = new Scanner(System.in);
